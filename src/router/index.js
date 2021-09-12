@@ -2,14 +2,20 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Calculator from "../views/Calculator.vue";
+import Investments from "../views/Investments.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/calculator",
-    name: "calculator",
+    name: "Calculator",
     component: Calculator,
+  },
+  {
+    path: "/investments",
+    name: "Investments",
+    component: Investments,
   },
   {
     path: "*",
