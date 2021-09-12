@@ -145,7 +145,7 @@ export default {
   },
   methods: {
     addDigit(digit) {
-      this.NumInput = this.NumInput * 10 + digit;
+      this.NumInput = parseFloat(this.NumInput.toString() + digit.toString());
     },
     cancelOperation() {
       this.NumInput = 0;
