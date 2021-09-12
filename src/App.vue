@@ -3,7 +3,9 @@
     <v-main>
       <navBar />
       <v-container>
-        <router-view />
+        <transition name="switchTab" mode="out-in" apear>
+          <router-view />
+        </transition>
       </v-container>
     </v-main>
   </v-app>
@@ -23,3 +25,24 @@ export default {
   methods: {},
 };
 </script>
+
+<style scoped>
+.switchTab-leave-active {
+  animation: leave 1s ease-in-out;
+}
+.switchTab-enter-active {
+  animation: leave reverse 1s ease-in-out;
+}
+@keyframes leave {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    width: 800px;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0;
+    width: 0px;
+  }
+}
+</style>
