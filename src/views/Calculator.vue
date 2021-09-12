@@ -18,55 +18,104 @@
       <v-container class="fill">
         <v-row>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="seven">7</v-btn>
+            <v-btn class="calcBtn pa-10" name="seven" @click="addDigit(7)"
+              >7</v-btn
+            >
           </v-col>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10 " name="eight">8</v-btn>
+            <v-btn class="calcBtn pa-10 " name="eight" @click="addDigit(8)"
+              >8</v-btn
+            >
           </v-col>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="nine">9</v-btn>
+            <v-btn class="calcBtn  pa-10" name="nine" @click="addDigit(9)"
+              >9</v-btn
+            >
           </v-col>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="sum" color="primary">+</v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="four">4</v-btn>
-          </v-col>
-          <v-col cols="3">
-            <v-btn class="calcBtn  pa-10 " name="five">5</v-btn>
-          </v-col>
-          <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="six">6</v-btn>
-          </v-col>
-          <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="sub" color="primary">-</v-btn>
+            <v-btn
+              class="calcBtn pa-10"
+              name="sum"
+              color="primary"
+              @click="operation('sum')"
+              >+</v-btn
+            >
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="one">1</v-btn>
+            <v-btn class="calcBtn pa-10" name="four" @click="addDigit(4)"
+              >4</v-btn
+            >
           </v-col>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10 " name="two">2</v-btn>
+            <v-btn class="calcBtn pa-10 " name="five" @click="addDigit(5)"
+              >5</v-btn
+            >
           </v-col>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="three">3</v-btn>
+            <v-btn class="calcBtn pa-10" name="six" @click="addDigit(6)"
+              >6</v-btn
+            >
           </v-col>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="sub" color="primary">/</v-btn>
+            <v-btn
+              class="calcBtn pa-10"
+              name="sub"
+              color="primary"
+              @click="operation('subtract')"
+              >-</v-btn
+            >
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10 secondary" name="ac">AC</v-btn>
+            <v-btn class="calcBtn pa-10" name="one" @click="addDigit(1)"
+              >1</v-btn
+            >
           </v-col>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10 " name="zero">0</v-btn>
+            <v-btn class="calcBtn pa-10 " name="two" @click="addDigit(2)"
+              >2</v-btn
+            >
           </v-col>
           <v-col cols="3">
-            <v-btn class="calcBtn  pa-10" name="multi" color="primary">*</v-btn>
+            <v-btn class="calcBtn pa-10" name="three" @click="addDigit(3)"
+              >3</v-btn
+            >
+          </v-col>
+          <v-col cols="3">
+            <v-btn
+              class="calcBtn  pa-10"
+              name="sub"
+              color="primary"
+              @click="operation('divide')"
+              >/</v-btn
+            >
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <v-btn
+              class="calcBtn pa-10 secondary"
+              name="ac"
+              @click="cancelOperation"
+              >AC</v-btn
+            >
+          </v-col>
+          <v-col cols="3">
+            <v-btn class="calcBtn pa-10 " name="zero" @click="addDigit(0)"
+              >0</v-btn
+            >
+          </v-col>
+          <v-col cols="3">
+            <v-btn
+              class="calcBtn  pa-10"
+              name="multi"
+              color="primary"
+              @click="operation('multiply')"
+              >*</v-btn
+            >
           </v-col>
           <v-col cols="3">
             <v-btn
@@ -74,6 +123,7 @@
               color="secondary"
               width="100%"
               name="equals"
+              @click="calculateValue"
               >=</v-btn
             >
           </v-col>
@@ -89,7 +139,46 @@ export default {
   data() {
     return {
       NumInput: 0,
+      auxN: -1,
+      nextOperation: "none",
     };
+  },
+  methods: {
+    addDigit(digit) {
+      this.NumInput = this.NumInput * 10 + digit;
+    },
+    cancelOperation() {
+      this.NumInput = 0;
+      this.auxN = -1;
+      this.nextOperation = "none";
+    },
+    calculateValue() {
+      if (this.nextOperation != "none") {
+        if (this.nextOperation == "multiply") {
+          this.NumInput = this.auxN * this.NumInput;
+        }
+        if (this.nextOperation == "divide") {
+          this.NumInput = this.auxN / this.NumInput;
+        }
+        if (this.nextOperation == "sum") {
+          this.NumInput = this.auxN + this.NumInput;
+        }
+        if (this.nextOperation == "subtract") {
+          this.NumInput = this.auxN - this.NumInput;
+        }
+      }
+      this.auxN = -1;
+      this.nextOperation = "none";
+    },
+    operation(curOperation) {
+      if (this.auxN > 0) {
+        this.calculateValue();
+      } else {
+        this.auxN = this.NumInput;
+        this.NumInput = 0;
+      }
+      this.nextOperation = curOperation;
+    },
   },
 };
 </script>
