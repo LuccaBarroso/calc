@@ -9,6 +9,9 @@
     <router-link to="/investments" class="pl-2 mb-4">
       <v-btn color="primary"> Investments </v-btn>
     </router-link>
+    <router-link to="/discount" class="pl-2 mb-4">
+      <v-btn color="primary"> Discount </v-btn>
+    </router-link>
   </div>
 </template>
 
