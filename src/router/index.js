@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import Calculator from "../views/Calculator.vue";
 import Investments from "../views/Investments.vue";
 import Discount from "../views/Discount.vue";
@@ -9,7 +8,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/calculator",
+    path: "*",
     name: "Calculator",
     component: Calculator,
   },
@@ -22,11 +21,6 @@ const routes = [
     path: "/discount",
     name: "Discount",
     component: Discount,
-  },
-  {
-    path: "*",
-    name: "Home",
-    component: Home,
   },
   // {
   //   path: '/about',

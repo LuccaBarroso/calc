@@ -1,7 +1,7 @@
 <template>
   <v-card
     elevation="24"
-    class="mx-auto my-8 pa-8 pb-4"
+    class="mx-auto my-8 pa-8 pb-8"
     width="800px"
     outlined
     shaped
